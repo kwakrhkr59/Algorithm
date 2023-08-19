@@ -12,7 +12,7 @@ void select(vector<int> &arr) {
     for (int i = 0; i < CNT - 1; i++) {
         for (int j = i + 1; j < CNT; j++) {
             if (sum - (arr[i] + arr[j]) == 100) {
-								// i < j. arr[i]를 먼저 삭제할 경우 arr[j] 값이 arr[j-1]로 옮겨짐
+		// i < j. arr[i]를 먼저 삭제할 경우 arr[j] 값이 arr[j-1]로 옮겨짐
                 arr.erase(arr.begin() + j);
                 arr.erase(arr.begin() + i);
                 return;
