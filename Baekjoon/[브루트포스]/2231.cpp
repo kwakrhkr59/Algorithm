@@ -17,6 +17,7 @@ int bruteforce(int n) {
 int main() {
     int n;
     cin >> n;
+    
     cout << bruteforce(n);
     
     return 0;
