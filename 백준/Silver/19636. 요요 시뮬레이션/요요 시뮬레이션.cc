@@ -1,47 +1,43 @@
 #include <iostream>
-#include <tuple>
 #include <cmath>
+
 using namespace std;
-tuple<int, int, int> diet(int w0, int i0, int i, int a, int d, int t) {
-    int w1 = w0;          // 기초대사량 변화 고려 X
-    int w2 = w0, m2 = i0; // 기초대사량 변화 고려 O
 
-    while (d--) {
-        w1 += i - i0 - a;
-        w2 += i - m2 - a;
+int main()
+{
 
-        if (abs(i - m2 - a) > t) {
-            m2 += float(i - m2 - a) / 2.0;
-        }
+    int w1, w2;       // 체중 변수
+    int e, l1, l2, t; // 에너지 섭취량, 기초 대사량, 기초 대사량 변화
+    int d, a;         // 다이어트 기간, 활동 대사량
+
+    // 입력
+    cin >> w1 >> l1 >> t;
+    cin >> d >> e >> a;
+    w2 = w1;
+    l2 = l1;
+    for (int i = 0; i < d; i++)
+    {
+        w1 += e - (l1 + a); // 활동 대사량 변화 고려 x 체중
+        w2 += e - (l2 + a);
+        if (abs(e - (l2 + a)) > t)
+            l2 += floor((e - (l2 + a)) / 2.0); // 절댓값이 T를 초과하면 활동대사량은 증가한다
     }
-    return {w1, w2, m2};
-}
-int main() {
-    int w0, i0, i, a;
-    int d, t;
-    int final_weight, final_meta;
-    cin >> w0 >> i0 >> t;
-    cin >> d >> i >> a;
-
-    tuple<int, int, int> tmp = diet(w0, i0, i, a, d, t);
-    int w1 = get<0>(tmp), m1 = i0;
-    int w2 = get<1>(tmp), m2 = get<2>(tmp); // rl
-
-    if (w1 <= 0) {
-        cout << "Danger Diet\n";
-    } else {
-        cout << w1 << " " << m1 << "\n";
-    }
-
-    if (w2 <= 0 || m2 <= 0) {
-        cout << "Danger Diet";
-    } else {
-        cout << w2 << " " << m2 << " ";
-        if (m2 < i0) {
+    // 출력
+    if (w1 <= 0 || l1 <= 0)
+        cout << "Danger Diet"
+             << "\n";
+    else
+        cout << w1 << " " << l1 << "\n";
+    if (w2 <= 0 || l2 <= 0)
+        cout << "Danger Diet"
+             << "\n";
+    else
+    {
+        cout << w2 << " " << l2 << " ";
+        if (0 < l1 - (l2 - 0))
             cout << "YOYO";
-        } else {
+        else
             cout << "NO";
-        }
     }
     return 0;
 }
