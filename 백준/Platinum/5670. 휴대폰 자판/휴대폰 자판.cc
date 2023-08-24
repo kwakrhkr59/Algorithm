@@ -37,6 +37,10 @@ int getCnt(int n, vector<string> &dict, trie *root) {
     return cnt;
 }
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
     int n;
     string str;
 
@@ -46,7 +50,7 @@ int main() {
 
     while (cin >> n) {
         vector<string> dict(n);
-        trie *root = new trie('r');
+        trie *root = new trie('\0');
         root->insert('\0');
 
         for (int i = 0; i < n; i++) {
